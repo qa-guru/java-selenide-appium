@@ -17,6 +17,7 @@ java {
 dependencies {
     testImplementation 'com.codeborne:selenide:6.13.0'
     testImplementation 'io.appium:java-client:8.3.0'
+    testImplementation 'org.aeonbits.owner:owner:1.0.12'
     testImplementation 'org.junit.jupiter:junit-jupiter:5.10.2'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
     testRuntimeOnly 'org.slf4j:slf4j-simple:2.0.9'
