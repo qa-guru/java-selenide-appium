@@ -26,6 +26,18 @@ dependencies {
 test {
     useJUnitPlatform()
     systemProperties(System.getProperties())
+    def platform = System.getProperty('platform')
+    if (platform == 'ios') {
+        filter {
+            includeTestsMatching '*IosSampleTest'
+        }
+    } else if (platform == 'android') {
+        filter {
+            includeTestsMatching '*AndroidSearchTest'
+        }
+    } else {
+        throw new GradleException('STOP: pass -Dplatform=android or -Dplatform=ios')
+    }
     testLogging {
         events 'passed', 'failed', 'skipped'
         exceptionFormat 'full'

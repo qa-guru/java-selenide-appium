@@ -3,10 +3,12 @@ package tests;
 import com.codeborne.selenide.SelenideElement;
 import io.appium.java_client.AppiumBy;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.EnabledIfSystemProperty;
 
 import static com.codeborne.selenide.Condition.exist;
 import static com.codeborne.selenide.Selenide.$;
 
+@EnabledIfSystemProperty(named = "platform", matches = "android")
 public class AndroidSearchTest extends TestBase {
 
     @Test
