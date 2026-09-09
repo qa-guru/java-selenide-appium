@@ -6,6 +6,7 @@ build/
 .kotlin
 .env
 .env.*
+src/test/resources/browserstack.properties
 *.apk
 *.ipa
 *.app
