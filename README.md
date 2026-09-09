@@ -14,5 +14,8 @@ curl -u "$BROWSERSTACK_USERNAME:$BROWSERSTACK_ACCESS_KEY" \
 
 ```bash
 ./gradlew test -Dplatform=android
+./gradlew test -Dplatform=android -DdeviceHost=real -Dudid=<adb udid>
 ./gradlew test -Dplatform=ios
 ```
+
+`-DdeviceHost=` — `browserstack` (дефолт) или `real`. На `real` ключи BrowserStack не нужны: сессия идёт на локальный Appium (`ensure.py appium-wd-hub`). Обязателен `-Dudid=` с USB-устройства (`adb devices`); эмулятор не подставлять. APK — Wikipedia alpha с GitHub `latest` в `apps/` (`*.apk` в `.gitignore`) или `-Dandroid.app=`.
