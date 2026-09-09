@@ -9,7 +9,7 @@ import org.junit.jupiter.api.BeforeEach;
 import static com.codeborne.selenide.Selenide.closeWebDriver;
 import static com.codeborne.selenide.Selenide.open;
 
-public abstract class TestBase {
+public class TestBase {
 
     @BeforeAll
     static void configureSelenide() {
@@ -20,11 +20,9 @@ public abstract class TestBase {
 
     @BeforeEach
     void setUp() {
-        System.setProperty("platform", platform());
+        System.setProperty("platform", getClass().getSimpleName().startsWith("Ios") ? "ios" : "android");
         open();
     }
-
-    protected abstract String platform();
 
     @AfterEach
     void tearDown() {

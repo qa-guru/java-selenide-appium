@@ -9,11 +9,6 @@ import static com.codeborne.selenide.Selenide.$;
 
 public class AndroidSearchTest extends TestBase {
 
-    @Override
-    protected String platform() {
-        return "android";
-    }
-
     @Test
     void searchWikipedia() {
         SelenideElement skip = $(AppiumBy.id("org.wikipedia.alpha:id/fragment_onboarding_skip_button"));

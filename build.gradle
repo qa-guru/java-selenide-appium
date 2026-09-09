@@ -27,13 +27,9 @@ test {
     useJUnitPlatform()
     systemProperties(System.getProperties())
     def platform = System.getProperty('platform')
-    if (platform == 'ios') {
+    if (platform) {
         filter {
-            includeTestsMatching '*IosSampleTest'
-        }
-    } else if (platform == 'android') {
-        filter {
-            includeTestsMatching '*AndroidSearchTest'
+            includeTestsMatching "*${platform.capitalize()}*"
         }
     }
     testLogging {

@@ -8,11 +8,6 @@ import static com.codeborne.selenide.Selenide.$;
 
 public class IosSampleTest extends TestBase {
 
-    @Override
-    protected String platform() {
-        return "ios";
-    }
-
     @Test
     void textInputOutput() {
         $(AppiumBy.accessibilityId("Text Button")).should(exist).click();
