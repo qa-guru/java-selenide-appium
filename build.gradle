@@ -35,8 +35,6 @@ test {
         filter {
             includeTestsMatching '*AndroidSearchTest'
         }
-    } else {
-        throw new GradleException('STOP: pass -Dplatform=android or -Dplatform=ios')
     }
     testLogging {
         events 'passed', 'failed', 'skipped'
