@@ -45,8 +45,8 @@ public class BrowserstackDriver implements WebDriverProvider {
         options.setPlatformName("Android");
         options.setDeviceName("Samsung Galaxy S22 Ultra");
         options.setPlatformVersion("12.0");
-        options.setApp("bs://sample.app");
-        options.setCapability("bstack:options", bstackOptions(user, key, "Android Wikipedia search"));
+        options.setApp(androidApp());
+        options.setCapability("bstack:options", bstackOptions(user, key, "step-3", "Android Wikipedia search"));
         return new AndroidDriver(hubUrl(), options);
     }
 
@@ -57,17 +57,37 @@ public class BrowserstackDriver implements WebDriverProvider {
         options.setDeviceName("iPhone 14");
         options.setPlatformVersion("16");
         options.setApp("bs://sample.app");
-        options.setCapability("bstack:options", bstackOptions(user, key, "iOS sample Text Button"));
+        options.setCapability("bstack:options", bstackOptions(user, key, "step-2", "iOS sample Text Button"));
         return new IOSDriver(hubUrl(), options);
     }
 
-    private static Map<String, Object> bstackOptions(String user, String key, String sessionName) {
+    private static String androidApp() {
+        String app = firstNonBlank(System.getProperty("app"), authConfig.app());
+        if (app == null) {
+            throw new IllegalStateException(
+                    "STOP: set browserstack.app=bs://… in src/test/resources/browserstack.properties "
+                            + "(gitignored; upload Wikipedia alpha APK), or pass -Dbrowserstack.app= / -Dapp=. "
+                            + "Do not use bs://sample.app for Android.");
+        }
+        return app;
+    }
+
+    private static String firstNonBlank(String... values) {
+        for (String value : values) {
+            if (value != null && !value.isBlank()) {
+                return value.trim();
+            }
+        }
+        return null;
+    }
+
+    private static Map<String, Object> bstackOptions(String user, String key, String buildName, String sessionName) {
         Map<String, Object> bstackOptions = new HashMap<>();
         bstackOptions.put("userName", user);
         bstackOptions.put("accessKey", key);
         bstackOptions.put("appiumVersion", "2.6.0");
         bstackOptions.put("projectName", "QA.GURU Java Selenide Appium");
-        bstackOptions.put("buildName", "step-2");
+        bstackOptions.put("buildName", buildName);
         bstackOptions.put("sessionName", sessionName);
         return bstackOptions;
     }
